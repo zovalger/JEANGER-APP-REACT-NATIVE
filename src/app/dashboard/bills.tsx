@@ -1,11 +1,7 @@
-import { Text, View } from "react-native";
+import BillScreen from "@/src/bills/screens/BillScreen";
 
 const bills = () => {
-	return (
-		<View>
-			<Text>bills</Text>
-		</View>
-	);
+	return <BillScreen />;
 };
 
 export default bills;

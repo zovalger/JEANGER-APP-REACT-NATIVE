@@ -1,11 +1,18 @@
-import { ScrollView, Text } from "react-native";
+import { Link } from "expo-router";
+import { ScrollView } from "react-native";
 
 export default function Index() {
 	return (
 		<ScrollView className="flex flex-row">
-			<Text className="border mt-3 ">
-				Edit sssapdassdap/index.tsx to edit this screen.
-			</Text>
+			<Link className="p-4" href={"/dashboard"}>
+				dashboard
+			</Link>
+			<Link className="p-4" href={"/auth/singin"}>
+				sing in
+			</Link>
+			<Link className="p-4" href={"/auth/singout"}>
+				sing out
+			</Link>
 		</ScrollView>
 	);
 }

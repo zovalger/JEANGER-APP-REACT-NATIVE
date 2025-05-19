@@ -1,5 +1,7 @@
-
-import { initialValuesBill, initialValuesForeignExchange } from "@/src/config/initialValues";
+import {
+	initialValuesBill,
+	initialValuesForeignExchange,
+} from "@/src/config/initialValues";
 import { CurrencyType } from "@/src/enums";
 import { ForeignExchange } from "@/src/foreign_exchange/interfaces/ForeignExchange.interface";
 import { Bill, BillItem } from "../interfaces/bill.interface";
@@ -10,7 +12,6 @@ const calculateTotals = (
 ): Bill => {
 	const { items } = bill;
 
-	// todo: calcular totales de euro y dolares
 	const USD = items.reduce((total: number, item: BillItem) => {
 		const { cost, currencyType, quantity } = item;
 
@@ -18,7 +19,8 @@ const calculateTotals = (
 
 		if (currencyType === CurrencyType.EUR)
 			toSum = (toSum * foreignExchange.euro) / foreignExchange.dolar;
-		if (currencyType === CurrencyType.BSF) toSum = toSum / foreignExchange.dolar;
+		if (currencyType === CurrencyType.BSF)
+			toSum = toSum / foreignExchange.dolar;
 
 		return total + toSum;
 	}, 0);

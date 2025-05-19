@@ -1,8 +1,5 @@
 import Input from "@/src/components/Input";
-import {
-	initialValuesBill,
-	initialValuesForeignExchange,
-} from "@/src/config/initialValues";
+import { initialValuesBill } from "@/src/config/initialValues";
 import { CurrencyType } from "@/src/enums";
 import useForeignExchange from "@/src/foreign_exchange/hooks/useForeignExchange";
 import {
@@ -14,142 +11,12 @@ import useProduct from "@/src/products/hooks/useProduct";
 import { useEffect, useState } from "react";
 import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import uuid from "react-native-uuid";
-import {
-	clearBill,
-	deleteItemInBill,
-	updateBillItem,
-} from "../helpers/Bill.helpers";
+import BillItem from "../components/BillItem";
+import { clearBill, updateBillItem } from "../helpers/Bill.helpers";
 import useBill from "../hooks/useBill";
 import { IBillItem } from "../interfaces/bill.interface";
 
 const regExpAdder = /^(\+|\-)\d{1,}/i;
-
-interface propssss {
-	data: IBillItem;
-	onDeleteItem?(productId: string): void;
-}
-
-function BillProductVisorItem({ data, onDeleteItem }: propssss) {
-	const { currentBill, setCurrentBill } = useBill();
-	const { foreignExchange } = useForeignExchange();
-	const { getProduct } = useProduct();
-
-	const { quantity, productId } = data;
-	const { name, cost, currencyType } = getProduct(data.productId);
-
-	const [openView, setOpenView] = useState(false);
-
-	const handdleOpenView = () => {
-		setOpenView(true);
-	};
-	const handdleCloseView = () => {
-		setOpenView(false);
-	};
-
-	const handdleDelete = async () => {
-		if (onDeleteItem) onDeleteItem(productId);
-		setCurrentBill(deleteItemInBill(currentBill, foreignExchange, productId));
-	};
-
-	useEffect(() => {
-		return () => {};
-	}, []);
-
-	let d = foreignExchange || initialValuesForeignExchange;
-
-	const divisaRef = currencyType === CurrencyType.USD ? d.dolar : d.euro;
-	const BSF = currencyType === CurrencyType.BSF ? cost : cost * divisaRef;
-
-	// *******************************************************************
-	// 													modal
-	// *******************************************************************
-
-	const [qu, setQu] = useState(0);
-
-	const onSubmit = () => {
-		const newBill = updateBillItem(
-			currentBill,
-			{ ...data, quantity: qu },
-			foreignExchange
-		);
-		setCurrentBill(newBill);
-		handdleCloseView();
-	};
-
-	// *******************************************************************
-	// 													Render
-	// *******************************************************************
-
-	return (
-		<TouchableOpacity
-			onPress={() => {
-				handdleOpenView();
-			}}
-		>
-			<View>
-				<View>
-					<Text>{quantity}</Text>
-					<Text>{name}</Text>
-				</View>
-
-				<View>
-					<View>
-						<Text>
-							{BSF.toFixed(2)} {CurrencyType.BSF}
-						</Text>
-					</View>
-				</View>
-
-				<View>
-					<View>
-						<Text>
-							{(BSF * quantity).toFixed(2)} {CurrencyType.BSF}
-						</Text>
-					</View>
-				</View>
-
-				<View>
-					<Button
-						title="eliminar"
-						onPress={() => {
-							handdleDelete();
-						}}
-					/>
-				</View>
-			</View>
-
-			{openView && (
-				// <BillProductVisorItemViewForm
-				// 	data={data}
-				// 	onClose={handdleCloseView}
-				// />
-
-				<View>
-					<View>
-						<View>
-							<View>
-								<Input
-									autoFocus
-									placeholder="Cantidad"
-									onKeyPress={({ nativeEvent: { key } }) => {
-										if (key === "Enter") onSubmit();
-									}}
-									keyboardType="decimal-pad"
-									value={qu.toString()}
-									onChange={({ nativeEvent: { text } }) =>
-										setQu(parseFloat(text))
-									}
-								/>
-
-								<Button title=">" onPress={() => onSubmit()} />
-							</View>
-						</View>
-					</View>
-				</View>
-			)}
-		</TouchableOpacity>
-	);
-}
 
 const BillScreen = () => {
 	const { foreignExchange } = useForeignExchange();
@@ -411,16 +278,12 @@ const BillScreen = () => {
 			<View>
 				{/* // todo: que no se desordenen al agregarlos a la factura  */}
 				{productsBillItemsFavoritesByPriority.map((data) => (
-					<BillProductVisorItem
-						key={uuid.v4()}
-						data={data}
-						onDeleteItem={onDeleteItem}
-					/>
+					<BillItem key={uuid.v4()} data={data} onDeleteItem={onDeleteItem} />
 				))}
 
 				{currentBill &&
 					remainingBillItem.map((item) => (
-						<BillProductVisorItem key={uuid.v4()} data={item} />
+						<BillItem key={uuid.v4()} data={item} />
 					))}
 
 				<View>

@@ -1,13 +1,11 @@
 import { TextInput, TextInputProps } from "react-native";
 
-interface props extends TextInputProps {
-	
-}
+interface props extends TextInputProps {}
 
 const Input = (props: props) => {
-	const { className } = props;
+	const { className, ...otherPros } = props;
 
-	return <TextInput {...props} className={` ${className}`} />;
+	return <TextInput {...otherPros} className={` ${className}`} />;
 };
 
 export default Input;

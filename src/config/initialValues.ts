@@ -1,15 +1,15 @@
-import { Bill } from "../bills/interfaces/bill.interface";
-import { ForeignExchange } from "../foreign_exchange/interfaces/ForeignExchange.interface";
+import { IBill } from "../bills/interfaces/bill.interface";
+import { IForeignExchange } from "../foreign_exchange/interfaces/ForeignExchange.interface";
 
 
-export const initialValuesForeignExchange: ForeignExchange = {
+export const initialValuesForeignExchange: IForeignExchange = {
 	bankBusinessDate: new Date().toString(),
 	dolar: 0,
 	euro: 0,
 	date: new Date().toString(),
 };
 
-export const initialValuesBill: Bill = {
+export const initialValuesBill: IBill = {
 	_id: "",
 	name: "",
 	date: new Date(),

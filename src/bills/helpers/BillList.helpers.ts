@@ -1,7 +1,7 @@
 import { initialValuesBill } from "@/src/config/initialValues";
-import { Bill } from "../interfaces/bill.interface";
+import { IBill } from "../interfaces/bill.interface";
 
-export const addBillToList = (billList: Bill[], bill: Bill | null): Bill[] => {
+export const addBillToList = (billList: IBill[], bill: IBill | null): IBill[] => {
 	if (!bill) return billList;
 
 	if (!bill.items.length) return billList;
@@ -16,9 +16,9 @@ export const addBillToList = (billList: Bill[], bill: Bill | null): Bill[] => {
 };
 
 export const getOneBillAndRemove = (
-	billList: Bill[],
+	billList: IBill[],
 	billId: string
-): [Bill, Bill[]] => {
+): [IBill, IBill[]] => {
 	const selectedBill = billList.find((bill) => bill._id === billId);
 
 	if (!selectedBill) return [initialValuesBill, billList];
@@ -29,6 +29,6 @@ export const getOneBillAndRemove = (
 };
 
 export const deleteOneBillFromList = (
-	billList: Bill[],
+	billList: IBill[],
 	billId: string
-): Bill[] => billList.filter((item) => item._id !== billId);
+): IBill[] => billList.filter((item) => item._id !== billId);

@@ -20,12 +20,12 @@ import {
 	updateBillItem,
 } from "../helpers/Bill.helpers";
 import useBill from "../hooks/useBill";
-import { BillItem } from "../interfaces/bill.interface";
+import { IBillItem } from "../interfaces/bill.interface";
 
 const regExpAdder = /^(\+|\-)\d{1,}/i;
 
 interface propssss {
-	data: BillItem;
+	data: IBillItem;
 	onDeleteItem?(productId: string): void;
 }
 
@@ -187,7 +187,7 @@ const BillScreen = () => {
 	}, [inputValue]);
 
 	const addProductToBill = (productId: string, quantity?: number) => {
-		const newItemBill: BillItem = {
+		const newItemBill: IBillItem = {
 			productId,
 			quantity: quantity ? quantity : adderValue ? adderValue : 1,
 			cost: getProduct(productId).cost,

@@ -1,17 +1,17 @@
 import { create } from "zustand";
-import { Bill } from "../bills/interfaces/bill.interface";
+import { IBill } from "../bills/interfaces/bill.interface";
 import { initialValuesBill } from "../config/initialValues";
 
-interface BillStore {
-	bills: Bill[];
-	currentBill: Bill | null;
-	onSetCurrentBill(bill: Bill): void;
+interface IBillStore {
+	bills: IBill[];
+	currentBill: IBill | null;
+	onSetCurrentBill(bill: IBill): void;
 }
 
-const useBillStore = create<BillStore>((set) => ({
+const useBillStore = create<IBillStore>((set) => ({
 	bills: [],
 	currentBill: initialValuesBill,
-	onSetCurrentBill: (bill: Bill) => {
+	onSetCurrentBill: (bill: IBill) => {
 		set((state) => ({ ...state, currentBill: bill }));
 	},
 

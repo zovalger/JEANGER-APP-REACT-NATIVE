@@ -1,23 +1,23 @@
 import { CurrencyType } from "@/src/enums";
-import { ForeignExchange } from "@/src/foreign_exchange/interfaces/ForeignExchange.interface";
+import { IForeignExchange } from "@/src/foreign_exchange/interfaces/ForeignExchange.interface";
 
-export interface BillItem {
+export interface IBillItem {
 	productId: string;
 	quantity: number;
 	cost: number;
 	currencyType: CurrencyType;
 }
 
-export interface BillTotals {
+export interface IBillTotals {
 	BSF: number;
 	USD: number;
 }
 
-export interface Bill {
+export interface IBill {
 	_id: string;
 	name: string;
 	date: Date;
-	items: BillItem[];
-	foreignExchange: ForeignExchange;
-	totals: BillTotals;
+	items: IBillItem[];
+	foreignExchange: IForeignExchange;
+	totals: IBillTotals;
 }

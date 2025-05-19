@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { ForeignExchange } from "../foreign_exchange/interfaces/ForeignExchange.interface";
+import { IForeignExchange } from "../foreign_exchange/interfaces/ForeignExchange.interface";
 
-interface ForeignExchangeStore {
-	foreignExchange: ForeignExchange;
+interface IForeignExchangeStore {
+	foreignExchange: IForeignExchange;
 }
 
-const useForeignExchangeStore = create<ForeignExchangeStore>((set) => ({
+const useForeignExchangeStore = create<IForeignExchangeStore>((set) => ({
 	foreignExchange: {
 		euro: 105.63515899,
 		dolar: 94.763,

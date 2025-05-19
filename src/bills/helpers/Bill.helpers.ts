@@ -3,16 +3,16 @@ import {
 	initialValuesForeignExchange,
 } from "@/src/config/initialValues";
 import { CurrencyType } from "@/src/enums";
-import { ForeignExchange } from "@/src/foreign_exchange/interfaces/ForeignExchange.interface";
-import { Bill, BillItem } from "../interfaces/bill.interface";
+import { IForeignExchange } from "@/src/foreign_exchange/interfaces/ForeignExchange.interface";
+import { IBill, IBillItem } from "../interfaces/bill.interface";
 
 const calculateTotals = (
-	bill: Bill,
-	foreignExchange: ForeignExchange = initialValuesForeignExchange
-): Bill => {
+	bill: IBill,
+	foreignExchange: IForeignExchange = initialValuesForeignExchange
+): IBill => {
 	const { items } = bill;
 
-	const USD = items.reduce((total: number, item: BillItem) => {
+	const USD = items.reduce((total: number, item: IBillItem) => {
 		const { cost, currencyType, quantity } = item;
 
 		let toSum = cost * quantity;
@@ -34,15 +34,15 @@ const calculateTotals = (
 
 // todo: comentar paso
 export const updateBillItem = (
-	bill: Bill | null,
-	billItem: BillItem,
-	foreignExchange: ForeignExchange | null
-): Bill => {
+	bill: IBill | null,
+	billItem: IBillItem,
+	foreignExchange: IForeignExchange | null
+): IBill => {
 	const currentBill = bill || initialValuesBill;
 	const foreignExchangeCurrent =
 		foreignExchange || initialValuesForeignExchange;
 
-	let newItems: BillItem[] = currentBill.items;
+	let newItems: IBillItem[] = currentBill.items;
 
 	const oldBillItem = currentBill.items.find(
 		(item) => item.productId === billItem.productId
@@ -85,15 +85,15 @@ export const updateBillItem = (
 
 // todo: comentar paso
 export const setOneBillItem = (
-	bill: Bill | null,
-	billItem: BillItem,
-	foreignExchange: ForeignExchange | null
-): Bill => {
+	bill: IBill | null,
+	billItem: IBillItem,
+	foreignExchange: IForeignExchange | null
+): IBill => {
 	const currentBill = bill || initialValuesBill;
 	const foreignExchangeCurrent =
 		foreignExchange || initialValuesForeignExchange;
 
-	let newItems: BillItem[] = currentBill.items;
+	let newItems: IBillItem[] = currentBill.items;
 
 	const oldBillItem = currentBill.items.find(
 		(item) => item.productId === billItem.productId
@@ -128,10 +128,10 @@ export const setOneBillItem = (
 };
 
 export const deleteItemInBill = (
-	bill: Bill | null,
-	foreignExchange: ForeignExchange | null,
+	bill: IBill | null,
+	foreignExchange: IForeignExchange | null,
 	productId: string
-): Bill => {
+): IBill => {
 	const currentBill = bill || initialValuesBill;
 
 	const { items } = currentBill;
@@ -141,6 +141,6 @@ export const deleteItemInBill = (
 	return calculateTotals(currentBill, foreignExchange || undefined);
 };
 
-export const clearBill = (): Bill => {
+export const clearBill = (): IBill => {
 	return initialValuesBill;
 };

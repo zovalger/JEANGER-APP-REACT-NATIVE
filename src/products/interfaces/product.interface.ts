@@ -1,6 +1,6 @@
 import { CurrencyType } from "@/src/enums";
 
-export interface Product {
+export interface IProduct {
 	_id: string;
 	name: string;
 	cost: number;

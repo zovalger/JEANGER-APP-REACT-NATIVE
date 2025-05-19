@@ -1,12 +1,12 @@
 import useBillStore from "@/src/store/useBillStore";
-import { Bill } from "../interfaces/bill.interface";
+import { IBill } from "../interfaces/bill.interface";
 
 const useBill = (billId?: string) => {
 	const bills = useBillStore((state) => state.bills);
 	const currentBill = useBillStore((state) => state.currentBill);
 	const onSetCurrentBill = useBillStore((state) => state.onSetCurrentBill);
 
-	const setCurrentBill = (bill: Bill) => {
+	const setCurrentBill = (bill: IBill) => {
 		onSetCurrentBill(bill);
 	};
 

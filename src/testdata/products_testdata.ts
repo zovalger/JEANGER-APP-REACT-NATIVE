@@ -1,4 +1,4 @@
-import { Product } from "../products/interfaces/product.interface";
+import { IProduct } from "../products/interfaces/product.interface";
 
 const products_testdata = [
 	{
@@ -2153,4 +2153,4 @@ const products_testdata = [
 	},
 ];
 
-export default products_testdata as Product[];
+export default products_testdata as IProduct[];

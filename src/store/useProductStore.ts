@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { Product } from "../products/interfaces/product.interface";
+import { IProduct } from "../products/interfaces/product.interface";
 import products_testdata from "../testdata/products_testdata";
 
 
-interface ProductStore {
-	products: Product[];
+interface IProductStore {
+	products: IProduct[];
 }
 
-const useProductStore = create<ProductStore>((set) => ({
+const useProductStore = create<IProductStore>((set) => ({
 	products: products_testdata,
 	removeAllProducts: () => set((state) => ({ ...state, products: [] })),
 }));
